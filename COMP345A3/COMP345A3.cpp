@@ -62,6 +62,11 @@ int main()
 	std::cout << "Executing yellow(agressive) strategy" << std::endl;
 	yellow->executeStrategy();
 
+	// Should power pheonix
+	std::cout << "Executing yellow(defencive) strategy" << std::endl;
+	yellow->setStrategy(new DefencivePlayer());
+	yellow->executeStrategy();
+
 	// Should only power san francisco
 	std::cout << "Executing green(defencive) strategy" << std::endl;
 	green->executeStrategy();

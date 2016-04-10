@@ -9,7 +9,7 @@ public:
 		vector<City*> citiesToPower = vector<City*>();
 
 		for (City* c : owned) {
-			// Random [1,2]
+			// Random [0 , 1]
 			int random = rand() % 2;
 			
 			// 50% of the time power city
