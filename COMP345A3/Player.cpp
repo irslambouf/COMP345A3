@@ -48,9 +48,10 @@ void Player::buyCity(City* city) {
 
 			// Check if connection between owned and new city
 			for (City* c : owned) {
-				for (Connection* conn : c->getConnections()) {
-					if (conn->getCityName().compare(city->getName()) == 0) {
-						connectionPrice = conn->getPrice();
+				for (std::pair<City*, int> conn: c->getConnections()) {
+					// Connection end is same as city name
+					if (conn.first->getName().compare(city->getName()) == 0) {
+						connectionPrice = conn.second;
 					}
 				}
 			}
@@ -110,4 +111,22 @@ void Player::showPlayer() {
 		cout << " - " << c->getName() << endl;
 	}
 	cout << endl;
+}
+
+const std::string Player::getColor() {
+	return color;
+}
+
+void Player::powerCity(City* city) {
+	using namespace std;
+
+	cout << "Powering " << city->getName() << endl;
+}
+
+void Player::setStrategy(Strategy* strategy) {
+	this->strategy = strategy;
+}
+
+void Player::executeStrategy() {
+	strategy->powerHouses(color, owned);
 }

@@ -7,15 +7,15 @@ City::City(std::string name)
 	this->name = name;
 }
 
-void City::addConnection(Connection* connection) {
-	connections.push_back(connection);
+void City::addConnection(City* city, int price) {
+	connections.insert(std::pair<City*, int>(city, price));
 }
 
 const std::string City::getName() {
 	return name;
 }
 
-std::vector<Connection*> City::getConnections() {
+std::map<City*, int> City::getConnections() {
 	return connections;
 }
 
@@ -40,4 +40,8 @@ int City::getPrice() {
 
 void City::addOwner(std::string color) {
 	owners.push_back(color);
+}
+
+std::vector<std::string> City::getOwners() {
+	return owners;
 }

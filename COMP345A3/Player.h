@@ -2,6 +2,7 @@
 #include <string>
 #include <vector>
 #include "City.h"
+#include "Strategy.h"
 
 class Player
 {
@@ -12,9 +13,13 @@ public:
 	const int getOil();
 	const int getUranium();
 	const int getGarbadge();
+	const std::string getColor();
 	std::vector<City*> getOwned();
 	void buyCity(City* city);
 	void showPlayer();
+	void powerCity(City* city);
+	void setStrategy(Strategy* strategy);
+	void executeStrategy();
 private:
 	std::string color;
 	int electro;
@@ -23,5 +28,6 @@ private:
 	int uranium;
 	int garbadge;
 	std::vector<City*> owned;
+	Strategy* strategy;
 };
 

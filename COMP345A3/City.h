@@ -1,20 +1,21 @@
 #pragma once
 #include <string>
 #include <vector>
-#include "Connection.h"
+#include <map>
 
 class City
 {
 public:
 	City(std::string name);
-	void addConnection(Connection* connection);
+	void addConnection(City* city, int price);
 	const std::string getName();
-	std::vector<Connection*> getConnections();
+	std::map<City* , int> getConnections();
 	int getPrice();
 	void addOwner(std::string color);
+	std::vector<std::string> getOwners();
 private:
 	std::string name;
-	std::vector<Connection*> connections;
+	std::map<City*, int> connections;
 	std::vector<std::string> owners;
 };
 

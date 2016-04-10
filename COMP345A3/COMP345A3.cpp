@@ -3,57 +3,63 @@
 
 #include "stdafx.h"
 #include "Player.h"
-
+#include "AgressivePlayer.h"
+#include "DefencivePlayer.h"
 
 int main()
 {
+	// Setup players
 	Player* yellow = new Player("yellow");
 	Player* green = new Player("Green");
 	Player* red = new Player("Red");
-	Player* black = new Player("Black");
 
+	yellow->setStrategy(new AgressivePlayer());
+	green->setStrategy(new DefencivePlayer());
+
+	// Setup Cities
 	City* sanDiego = new City("San Diego");
 	City* pheonix = new City("Pheonix");
 	City* lasVegas = new City("Las Vegas");
 	City* losAngeles = new City("Los Angeles");
+	City* sanFran = new City("San Francisco");
 
-	Connection* sd1 = new Connection("Pheonix", 14);
-	Connection* sd2 = new Connection("Las Vegas", 9);
-	Connection* sd3 = new Connection("Los Angeles", 3);
-	sanDiego->addConnection(sd1);
-	sanDiego->addConnection(sd2);
-	sanDiego->addConnection(sd3);
+	// Setup connections between cities
+	sanDiego->addConnection(pheonix, 14);
+	sanDiego->addConnection(lasVegas, 9);
+	sanDiego->addConnection(losAngeles, 3);
 
-	Connection* p1 = new Connection("San Diego", 14);
-	Connection* p2 = new Connection("Las Vegas", 15);
-	pheonix->addConnection(p1);
-	pheonix->addConnection(p2);
+	pheonix->addConnection(sanDiego, 14);
+	pheonix->addConnection(lasVegas, 15);
 
-	Connection* lv1 = new Connection("Peonix", 15);
-	Connection* lv2 = new Connection("San Diego", 9);
-	Connection* lv3 = new Connection("Los Angeles", 9);
-	lasVegas->addConnection(lv1);
-	lasVegas->addConnection(lv2);
-	lasVegas->addConnection(lv3);
+	lasVegas->addConnection(pheonix, 15);
+	lasVegas->addConnection(sanDiego, 9);
+	lasVegas->addConnection(losAngeles, 9);
+	lasVegas->addConnection(sanFran, 14);
 
-	Connection* la1 = new Connection("San Diego", 3);
-	Connection* la2 = new Connection("Las Vegas", 9);
-	losAngeles->addConnection(la1);
-	losAngeles->addConnection(la2);
+	losAngeles->addConnection(sanDiego, 3);
+	losAngeles->addConnection(lasVegas, 9);
+	losAngeles->addConnection(sanFran, 9);
 
+	sanFran->addConnection(losAngeles, 9);
+	sanFran->addConnection(lasVegas, 14);
+
+	// Purchase cities
 	yellow->buyCity(sanDiego);
-	yellow->showPlayer();
 	yellow->buyCity(pheonix);
 	yellow->showPlayer();
 
-	red->buyCity(sanDiego);
+	red->buyCity(pheonix);
 	red->showPlayer();
 
-	black->buyCity(sanDiego);
-	black->showPlayer();
-
-	green->buyCity(sanDiego);
+	green->buyCity(losAngeles);
+	green->buyCity(sanFran);
 	green->showPlayer();
+
+	// Should only power san diego
+	yellow->executeStrategy();
+
+	// Should only power san francisco
+	green->executeStrategy();
 
 	system("pause");
 }
