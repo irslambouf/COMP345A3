@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "AgressivePlayer.h"
 #include "DefencivePlayer.h"
+#include "RandomPlayer.h"
 
 int main()
 {
@@ -13,8 +14,10 @@ int main()
 	Player* green = new Player("Green");
 	Player* red = new Player("Red");
 
+	// Set strategies
 	yellow->setStrategy(new AgressivePlayer());
 	green->setStrategy(new DefencivePlayer());
+	red->setStrategy(new RandomPlayer());
 
 	// Setup Cities
 	City* sanDiego = new City("San Diego");
@@ -62,6 +65,14 @@ int main()
 	// Should only power san francisco
 	std::cout << "Executing green(defencive) strategy" << std::endl;
 	green->executeStrategy();
+
+	// Might or might not power pheonix
+	std::cout << "Executing red(random) strategy x5 to show randomness" << std::endl;
+	red->executeStrategy();
+	red->executeStrategy();
+	red->executeStrategy();
+	red->executeStrategy();
+	red->executeStrategy();
 
 	system("pause");
 }
