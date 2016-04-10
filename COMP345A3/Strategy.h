@@ -4,6 +4,7 @@
 #include <iostream>
 #include "City.h"
 
+// Abstract interface
 class Strategy
 {
 public:

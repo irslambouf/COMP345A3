@@ -3,7 +3,7 @@
 
 class DefencivePlayer : public Strategy {
 public:
-	// Only power cities with no adjacent players
+	// Only power cities with no adjacent opponents
 	void powerHouses(std::string color, std::vector<City*> owned) {
 		using namespace std;
 
@@ -21,6 +21,7 @@ public:
 					// Not same owner
 					if (s.compare(color) != 0) {
 						hasAdjOpp = true;
+						break;
 					}
 				}
 			}
@@ -33,6 +34,7 @@ public:
 			}
 		}
 
+		// Display what cities will be powered
 		for (City* c : citiesToPower) {
 			cout << "Powering " << c->getName() << endl;
 		}

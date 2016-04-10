@@ -36,6 +36,8 @@ std::vector<City*> Player::getOwned() {
 	return owned;
 }
 
+// Buy city that is adjacent to owned city (Doesnt support recursive buying, i.e. cities that can be access through more 2 connections)
+// First city can be pruchase without adjacent cities
 void Player::buyCity(City* city) {
 	std::cout << color << " - trying to purchase " << city->getName() << std::endl;
 
@@ -60,6 +62,7 @@ void Player::buyCity(City* city) {
 			if (connectionPrice > 0) {
 				int totalPrice = connectionPrice + cityPrice;
 
+				// Enough electro to purchase
 				if (totalPrice <= electro) {
 					owned.push_back(city);
 					city->addOwner(color);
@@ -77,7 +80,10 @@ void Player::buyCity(City* city) {
 				std::cout << "Cant find connection to desired city, please try again" << std::endl;
 			}
 		}
+		// First city pruchase
 		else {
+			
+			// Enough electro
 			if (electro >= cityPrice) {
 				owned.push_back(city);
 				city->addOwner(color);
@@ -92,11 +98,13 @@ void Player::buyCity(City* city) {
 		
 
 	}
+	// City isnt full
 	else {
 		std::cout << city->getName() << " is full, cant purchase" << std::endl;
 	}
 }
 
+// Display player attribute values
 void Player::showPlayer() {
 	using namespace std;
 
@@ -122,6 +130,9 @@ void Player::powerCity(City* city) {
 
 	cout << "Powering " << city->getName() << endl;
 }
+
+
+/* Interface related methods */
 
 void Player::setStrategy(Strategy* strategy) {
 	this->strategy = strategy;

@@ -56,9 +56,11 @@ int main()
 	green->showPlayer();
 
 	// Should only power san diego
+	std::cout << "Executing yellow(agressive) strategy" << std::endl;
 	yellow->executeStrategy();
 
 	// Should only power san francisco
+	std::cout << "Executing green(defencive) strategy" << std::endl;
 	green->executeStrategy();
 
 	system("pause");

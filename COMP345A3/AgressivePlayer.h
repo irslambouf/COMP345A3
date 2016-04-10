@@ -35,6 +35,7 @@ public:
 			}
 		}
 
+		// Display what cities will be powered
 		for (City* c : citiesToPower) {
 			cout << "Powering " << c->getName() << endl;
 		}
